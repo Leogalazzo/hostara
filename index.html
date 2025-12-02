@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hostara | Desarrollo Web Profesional</title>
+    <meta name="description" content="Desarrollo web moderno, rápido y optimizado para vender. Landing pages y sitios corporativos.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------- VARIABLES ---------------- */
+:root {
+    --bg: #050505;
+    --text: #ffffff;
+    --text-muted: #9ca3af;
+    --primary: #8b5cf6;
+    --secondary: #06b6d4;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+body {
+    background: var(--bg);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ---------------- SCROLLBAR PERSONALIZADO ---------------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+html { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
+
+/* ---------------- BACKGROUND ---------------- */
+.ambient-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.blob { position: absolute; filter: blur(90px); opacity: .5; border-radius: 50%; animation: float 10s infinite ease-in-out alternate; }
+.blob-1 { top:-10%; left:-10%; width:50vw; height:50vw; background:var(--primary); }
+.blob-2 { bottom:-10%; right:-10%; width:50vw; height:50vw; background:var(--secondary); animation-delay: -5s; }
+@keyframes float { 0%{ transform:translate(0,0) scale(1);} 100%{ transform:translate(40px,60px) scale(1.1);} }
+
+/* ---------------- UTILIDADES ---------------- */
+.container { max-width:1200px; margin:auto; padding:0 2rem; }
+.section-title { text-align:center; font-size:clamp(2rem,5vw,3rem); font-weight:800; margin-bottom:1rem; line-height: 1.2; }
+.section-subtitle { text-align:center; color:var(--text-muted); margin-bottom:4rem; font-size: 1.1rem; }
+
+.btn {
+    padding:1rem 2.5rem; border-radius:50px; background:rgba(255,255,255,.05);
+    border:1px solid var(--glass-border); backdrop-filter:blur(10px);
+    text-decoration:none; color:white; display:inline-block; transition:.3s; font-weight:600;
+    cursor: pointer;
+    border: 1px solid var(--glass-border);
+}
+.btn:hover { transform:translateY(-3px); background:rgba(255,255,255,.1); box-shadow:0 0 25px rgba(139,92,246,.2); }
+.btn-primary { background:var(--primary); border:none; }
+.btn-primary:hover { background:#7c3aed; box-shadow:0 0 30px rgba(139,92,246,.5); }
+
+/* Botón flotante WhatsApp */
+.whatsapp-btn {
+    position:fixed; bottom:25px; right:25px; background:#25d366; z-index: 100;
+    width: 60px; height: 60px; border-radius:50%; color:white;
+    display:flex; justify-content:center; align-items:center; box-shadow:0 0 20px #25d36660;
+    text-decoration: none; transition: 0.3s;
+}
+.whatsapp-btn:hover { transform: scale(1.1); }
+.whatsapp-icon { width: 35px; height: 35px; fill: white; }
+
+/* ---------------- HERO ---------------- */
+header { min-height:90vh; display:flex; justify-content:center; align-items:center; text-align:center; padding: 2rem 0; }
+.hero-content h1 { font-size:clamp(3.5rem,8vw,6rem); font-weight:800; margin-bottom:1.5rem; line-height: 1.1; letter-spacing: -2px; }
+.hero-content h1 span {
+    background:linear-gradient(to right,var(--primary),var(--secondary));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero-content p { max-width:620px; margin:0 auto 2.5rem; color:var(--text-muted); font-size: 1.2rem; }
+
+/* ---------------- PROYECTOS ---------------- */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+.project-card {
+    background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px;
+    overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; cursor: pointer;
+}
+.project-image {
+    width: 100%; aspect-ratio: 16/9; position: relative; overflow: hidden; border-bottom: 1px solid var(--glass-border);
+}
+.project-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s ease; }
+.project-image::after {
+    content: "VER DEMO"; position: absolute; inset: 0;
+    background: rgba(139, 92, 246, 0.8); color: white; font-weight: 800; letter-spacing: 1px;
+    display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;
+    font-size: 1.1rem; pointer-events: none;
+}
+.project-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.project-card:hover .project-image::after { opacity: 1; }
+.project-card:hover .project-image img { transform: scale(1.05); }
+.project-info { padding: 1.2rem; background: rgba(0, 0, 0, 0.2); text-align: left; }
+.project-info h3 { font-size: 1.2rem; margin-bottom: 0.2rem; color: white; line-height: 1.2; }
+.project-info span { color: var(--secondary); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 5px; }
+.project-info span::before { content: "🔗"; font-size: 0.8rem; }
+.alert-note {
+    background: var(--glass); padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);
+    margin-bottom: 3rem; text-align: center; color: var(--secondary); font-weight: 600;
+}
+
+/* ---------------- MODAL / POPUP ---------------- */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center;
+    z-index: 999; padding: 20px;
+}
+.modal-content {
+    background: var(--bg); width: 95%; max-width: 1400px; height: 95%;
+    border-radius: 12px; overflow: hidden; position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7); display: flex; flex-direction: column;
+}
+.modal-header {
+    padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(26, 26, 26, 0.8); border-bottom: 1px solid var(--glass-border);
+}
+.close-btn {
+    background: var(--primary); color: white; border: none; padding: 8px 15px;
+    border-radius: 8px; cursor: pointer; font-size: 1rem; transition: 0.3s;
+}
+.close-btn:hover { background: #7c3aed; }
+.modal-iframe { flex-grow: 1; width: 100%; border: none; }
+
+/* ---------------- CARDS PRECIOS ---------------- */
+section { padding:6rem 0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; }
+
+.card {
+    background:var(--glass); border:1px solid var(--glass-border);
+    border-radius:24px; padding:2.5rem; backdrop-filter:blur(10px);
+    transition:.4s; position:relative; display: flex; flex-direction: column;
+}
+.card:hover {
+    transform:translateY(-10px); border-color:rgba(139,92,246,.4);
+    box-shadow:0 20px 40px -20px rgba(0,0,0,.5);
+}
+.card h3 { font-size: 1.5rem; color: white; margin-bottom: 0.5rem; }
+.card > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; height: 40px; }
+.price { font-size:3rem; font-weight:800; margin-bottom: 2rem; color: white; }
+.price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+.features { list-style: none; margin-bottom: 2.5rem; flex-grow: 1; text-align: left; }
+.features li { margin-bottom: 0.8rem; color: #d1d5db; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+.features li::before { content: "✓"; color: var(--secondary); font-weight: bold; font-size: 1.1rem; }
+.card.popular { border:1px solid var(--primary); background:linear-gradient(180deg,rgba(139,92,246,.1),transparent); }
+.badge { position:absolute; top:20px; right:20px; background:var(--primary); padding:6px 14px; border-radius:20px; font-size:.75rem; font-weight: 700; letter-spacing: 1px; }
+
+/* ---------------- TESTIMONIOS ---------------- */
+.testimonials { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; }
+.testimonial {
+    background:var(--glass); border-radius:20px; border:1px solid var(--glass-border);
+    padding:2rem; line-height:1.6; font-style: italic; color: #e5e7eb;
+}
+.testimonial strong { display: block; margin-top: 1rem; color: var(--primary); font-style: normal; font-size: 0.9rem; }
+
+/* ---------------- CONTACTO ---------------- */
+.contact-box {
+    background:var(--glass); border:1px solid var(--glass-border);
+    padding:3rem; border-radius:24px; max-width:700px; margin:auto;
+}
+.form-group { margin-bottom: 1rem; }
+input, textarea, select {
+    width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
+    color: white; font-family: inherit; font-size: 1rem; transition: 0.3s; outline: none;
+}
+input:focus, textarea:focus, select:focus {
+    border-color: var(--primary); background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+}
+select option { background: #1a1a1a; color: white; }
+
+/* ---------------- FOOTER ---------------- */
+footer {
+    padding:3rem 0; text-align:center; border-top:1px solid var(--glass-border);
+    color:var(--text-muted); font-size:.9rem; margin-top: 4rem;
+}
+
+/* ---------------- ANIMACIONES ---------------- */
+.reveal { opacity:0; transform:translateY(60px); transition:all .8s ease-out; }
+.reveal.active { opacity:1; transform:translateY(0); }
+
+/* ESTILOS ALERTAS FORMULARIO */
+.status-msg { margin-top: 1rem; font-weight: bold; display: none; }
+.success { color: #25d366; }
+.error { color: #ef4444; }
+
+@media (max-width: 768px) {
+    .contact-box { padding: 1.5rem; }
+    .hero-content h1 { font-size: 3rem; }
+    .price { font-size: 2.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+</div>
+
+<header>
+    <div class="container hero-content reveal">
+        <h1>Webs que <span>Venden</span></h1>
+        <p>Transformo ideas en sitios web profesionales diseñados para convertir visitantes en clientes. No solo diseño: construyo activos digitales que generan ingresos.</p>
+
+        <div>
+            <button class="btn btn-primary" onclick="consultarPlan('Asesoría General')">Quiero mi Sitio</button>
+            <a href="#precios" class="btn">Ver Precios</a>
+        </div>
+    </div>
+</header>
+
+<section id="trabajos">
+    <div class="container">
+        <h2 class="section-title reveal">Trabajos Recientes</h2>
+        <p class="section-subtitle reveal">Resultados reales para clientes reales.</p>
+        
+        <p class="alert-note reveal">
+            ¡Haz clic en cualquier proyecto para ver la DEMO interactiva en pantalla completa!
+        </p>
+
+        <div class="project-grid">
+            <div class="project-card reveal" onclick="openModal('https://tabymakeup.com.ar/', 'Taby Makeup')">
+                <div class="project-image">
+                    <img src="tabymakeup.png" alt="Taby Makeup">
+                </div>
+                <div class="project-info">
+                    <h3>Taby Makeup</h3>
+                    <span>tabymakeup.com.ar</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" onclick="openModal('https://ubify.com.ar/', 'Ubify')">
+                <div class="project-image">
+                    <img src="ubify.png" alt="Ubify">
+                </div>
+                <div class="project-info">
+                    <h3>Ubify</h3>
+                    <span>ubify.com.ar</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" onclick="openModal('https://leogalazzo.github.io/pandashop-bd/', 'Panda Shop')">
+                <div class="project-image">
+                    <img src="Panda.png" alt="Panda Shop">
+                </div>
+                <div class="project-info">
+                    <h3>Panda Shop</h3>
+                    <span>pandashop-bd.github.io</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reveal" style="text-align: center; margin-top: 3rem;">
+            <button class="btn btn-primary" onclick="consultarPlan('Sitio Personalizado como en el Portafolio')">
+                Quiero un sitio así
+            </button>
+        </div>
+    </div>
+</section>
+
+<section id="precios">
+    <div class="container">
+        <h2 class="section-title reveal">Planes Claros</h2>
+        <p class="section-subtitle reveal">Sin costos ocultos. Inversión única.</p>
+
+        <div class="grid">
+            <div class="card reveal">
+                <h3>Landing Page</h3>
+                <p>Perfecta para vender un servicio o captar leads.</p>
+                <div class="price">$150.000 <span>ARS</span></div>
+                <ul class="features">
+                    <li>Diseño One-Page</li>
+                    <li>Responsive Mobile/PC</li>
+                    <li>Botón flotante WhatsApp</li>
+                    <li>Formulario de Contacto</li>
+                    <li>Entrega Express (72hs)</li>
+                </ul>
+                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Landing Page')">Contratar Plan</button>
+            </div>
+
+            <div class="card popular reveal">
+                <div class="badge">MÁS VENDIDO</div>
+                <h3>Sitio Corporativo</h3>
+                <p>Ideal para negocios que buscan posicionarse.</p>
+                <div class="price">$350.000 <span>ARS</span></div>
+                <ul class="features">
+                    <li>Hasta 5 secciones internas</li>
+                    <li>Optimización SEO Inicial</li>
+                    <li>Animaciones Premium</li>
+                    <li>Integración Google Maps</li>
+                    <li>1 mes de Soporte Gratis</li>
+                </ul>
+                <button class="btn btn-primary" style="text-align: center; width:100%" onclick="consultarPlan('Sitio Corporativo')">Contratar Plan</button>
+            </div>
+
+            <div class="card reveal">
+                <h3>A Medida</h3>
+                <p>Sistemas complejos y tiendas online.</p>
+                <div class="price">Cotizar <span>USD</span></div>
+                <ul class="features">
+                    <li>E-commerce / Tienda</li>
+                    <li>Panel de Administración</li>
+                    <li>Base de Datos</li>
+                    <li>Login de Usuarios</li>
+                    <li>Integración de Pagos</li>
+                </ul>
+                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Proyecto a Medida')">Consultar</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 class="section-title reveal">Clientes Felices</h2>
+        <p class="section-subtitle reveal">Historias reales. Resultados reales.</p>
+
+        <div class="testimonials">
+            <div class="testimonial reveal">
+                “Antes mi negocio no aparecía en Google. Hoy recibo consultas todos los días gracias a la web nueva. La inversión se pagó sola en dos semanas.”
+                <strong>— Leandro Paredes, Arquitecto</strong>
+            </div>
+            <div class="testimonial reveal">
+                “Necesitaba algo rápido para una campaña de publicidad y la landing page quedó increíble. Convierte visitas en ventas mucho mejor que la anterior.”
+                <strong>— Lautaro Blanco, Agencia de pintureria</strong>
+            </div>
+            <div class="testimonial reveal">
+                “El diseño es super moderno y carga volando en el celular. Mis clientes siempre me dicen que la web se ve muy profesional.”
+                <strong>— Ander Herrera, Soldador</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto">
+    <div class="container">
+        <h2 class="section-title reveal">¿Tenés una duda específica?</h2>
+        <p class="section-subtitle reveal">Si preferís escribirme por correo, usá este formulario.</p>
+
+        <div class="contact-box reveal">
+            <form id="contactForm">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem; margin-bottom: 1rem;">
+                    <input type="text" name="nombre" placeholder="Tu Nombre" required>
+                    <input type="email" name="email" placeholder="Tu Email" required>
+                </div>
+
+                <div class="form-group">
+                    <select name="interes">
+                        <option value="Consulta General">Tengo una consulta general</option>
+                        <option value="Empresa">Soy una empresa / agencia</option>
+                        <option value="Otro">Otro motivo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <textarea name="mensaje" rows="4" placeholder="¿En qué te puedo ayudar?" required></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">Enviar Mensaje 📩</button>
+                
+                <p id="formStatus" class="status-msg"></p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2025 Hostara — Desarrollo Web Profesional.
+</footer>
+
+<a href="https://wa.me/5493644539325" class="whatsapp-btn" target="_blank">
+    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.637 3.891 1.685 5.405l-.634 2.37 2.438-.641zm11.233-5.356c-.072-.124-.265-.198-.554-.342-.293-.145-1.724-.861-1.997-1.006-.273-.145-.472-.217-.671.082-.2.299-.769.967-.942 1.166-.174.199-.347.223-.64.075-.294-.15-1.242-.458-2.368-1.462-.867-.775-1.453-1.732-1.623-2.028-.174-.298-.018-.459.129-.606.133-.132.296-.347.444-.52.149-.174.199-.297.299-.497.098-.199.049-.373-.025-.521-.075-.148-.671-1.615-.919-2.213-.242-.578-.487-.5-.671-.509-.174-.008-.372-.01-.571-.01-.198 0-.52.075-.792.373-.273.298-1.042 1.018-1.042 2.477 0 1.46 1.063 2.875 1.211 3.074.15.199 2.094 3.197 5.071 4.482.709.306 1.261.489 1.693.626.713.226 1.362.194 1.874.118.572-.086 1.725-.705 1.969-1.385.244-.681.244-1.265.172-1.385z"/>
+    </svg>
+</a>
+
+<div id="project-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="modal-title">Cargando Proyecto...</span>
+            <button class="close-btn" onclick="closeModal()">Cerrar (ESC)</button>
+        </div>
+        <iframe id="project-iframe" class="modal-iframe" src="" allowfullscreen></iframe>
+    </div>
+</div>
+
+<script>
+// --- CONFIGURACIÓN GOOGLE SHEETS ---
+// Pega aquí la URL de tu Web App de Google Apps Script cuando la tengas:
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTeMcEtJU71eclWWOk3HBhnwiihtdfPIVbgXu_pFxnnTqGBYN7MSJngBSL2iXKl8ZK/exec"; 
+
+// 1. Animación Reveal
+const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('active'); observer.unobserve(e.target); } });
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// 2. Funcionalidad: Clic en Plan -> WhatsApp
+function consultarPlan(plan) {
+    const telefono = "5493644539325"; // Tu número
+    const mensaje = `Hola Hostara, estoy interesado en el plan: *${plan}*. ¿Me podrías dar más información?`;
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+}
+
+// 3. Funcionalidad: Formulario -> Google Sheets
+const form = document.getElementById('contactForm');
+const statusMsg = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (SCRIPT_URL === "URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI") {
+        alert("¡Falta configurar la URL del Script de Google! Revisa el código.");
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Enviando...";
+
+    fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form) })
+    .then(response => {
+        statusMsg.innerText = "¡Mensaje enviado! Te responderé pronto.";
+        statusMsg.className = "status-msg success";
+        statusMsg.style.display = "block";
+        form.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Enviar Mensaje 📩";
+    })
+    .catch(error => {
+        statusMsg.innerText = "Hubo un error. Por favor intenta por WhatsApp.";
+        statusMsg.className = "status-msg error";
+        statusMsg.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Enviar Mensaje 📩";
+    });
+});
+
+// 4. Funcionalidad del Modal
+const modal = document.getElementById('project-modal');
+const iframe = document.getElementById('project-iframe');
+const modalTitle = document.getElementById('modal-title');
+
+function openModal(url, title = 'Demo de Proyecto') {
+    document.body.style.overflow = 'hidden'; 
+    modalTitle.textContent = title;
+    iframe.src = url;
+    modal.style.display = 'flex';
+}
+
+function closeModal() {
+    document.body.style.overflow = '';
+    modal.style.display = 'none';
+    iframe.src = ''; 
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
+});
+
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+});
+</script>
+
+</body>
+</html>
