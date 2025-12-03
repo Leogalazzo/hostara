@@ -7,6 +7,8 @@
     <title>Hostara | Desarrollo Web Profesional</title>
     <meta name="description" content="Desarrollo web moderno, rápido y optimizado para vender. Landing pages y sitios corporativos.">
     
+    <link rel="icon" href="codigo.png" type="image/png">
+
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
@@ -16,6 +18,7 @@
     --text: #ffffff;
     --text-muted: #9ca3af;
     --primary: #8b5cf6;
+    --primary-glow: rgba(139, 92, 246, 0.5);
     --secondary: #06b6d4;
     --glass: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
@@ -53,16 +56,62 @@ html { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
 .section-title { text-align:center; font-size:clamp(2rem,5vw,3rem); font-weight:800; margin-bottom:1rem; line-height: 1.2; }
 .section-subtitle { text-align:center; color:var(--text-muted); margin-bottom:4rem; font-size: 1.1rem; }
 
+/* --- BOTONES PREMIUM --- */
 .btn {
-    padding:1rem 2.5rem; border-radius:50px; background:rgba(255,255,255,.05);
-    border:1px solid var(--glass-border); backdrop-filter:blur(10px);
-    text-decoration:none; color:white; display:inline-block; transition:.3s; font-weight:600;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    border: 1px solid var(--glass-border);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    vertical-align: middle;
+    height: 52px;
+    line-height: 1;
+    /* Estilo por defecto (Secundario/Glass) */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
-.btn:hover { transform:translateY(-3px); background:rgba(255,255,255,.1); box-shadow:0 0 25px rgba(139,92,246,.2); }
-.btn-primary { background:var(--primary); border:none; }
-.btn-primary:hover { background:#7c3aed; box-shadow:0 0 30px rgba(139,92,246,.5); }
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* Botón Principal (Neón) */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #9f7aea 0%, #6d28d9 100%);
+    box-shadow: 0 0 40px var(--primary-glow), 0 0 10px #fff;
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Contenedor de botones arreglado */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
 
 /* Botón flotante WhatsApp */
 .whatsapp-btn {
@@ -74,8 +123,16 @@ html { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
 .whatsapp-btn:hover { transform: scale(1.1); }
 .whatsapp-icon { width: 35px; height: 35px; fill: white; }
 
-/* ---------------- HERO ---------------- */
-header { min-height:90vh; display:flex; justify-content:center; align-items:center; text-align:center; padding: 2rem 0; }
+/* ---------------- HERO (Modificado para que se vea lo de abajo) ---------------- */
+header { 
+    /* 75vh asegura que sobre espacio abajo para ver la siguiente sección */
+    min-height: 75vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    padding: 4rem 0; 
+}
 .hero-content h1 { font-size:clamp(3.5rem,8vw,6rem); font-weight:800; margin-bottom:1.5rem; line-height: 1.1; letter-spacing: -2px; }
 .hero-content h1 span {
     background:linear-gradient(to right,var(--primary),var(--secondary));
@@ -133,7 +190,7 @@ header { min-height:90vh; display:flex; justify-content:center; align-items:cent
 .close-btn:hover { background: #7c3aed; }
 .modal-iframe { flex-grow: 1; width: 100%; border: none; }
 
-/* ---------------- CARDS PRECIOS ---------------- */
+/* ---------------- CARDS PRECIOS (ESTILO HOSTINGER) ---------------- */
 section { padding:6rem 0; }
 .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; }
 
@@ -141,6 +198,7 @@ section { padding:6rem 0; }
     background:var(--glass); border:1px solid var(--glass-border);
     border-radius:24px; padding:2.5rem; backdrop-filter:blur(10px);
     transition:.4s; position:relative; display: flex; flex-direction: column;
+    justify-content: space-between;
 }
 .card:hover {
     transform:translateY(-10px); border-color:rgba(139,92,246,.4);
@@ -148,13 +206,37 @@ section { padding:6rem 0; }
 }
 .card h3 { font-size: 1.5rem; color: white; margin-bottom: 0.5rem; }
 .card > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; height: 40px; }
-.price { font-size:3rem; font-weight:800; margin-bottom: 2rem; color: white; }
-.price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+
+/* Nuevos Estilos de Precio */
+.old-price {
+    text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem;
+    margin-bottom: -10px; display: block;
+}
+.price-container {
+    display: flex; align-items: flex-start; gap: 5px; margin: 1rem 0 0.5rem 0;
+}
+.currency { font-size: 1.2rem; font-weight: 600; margin-top: 8px; }
+.big-number { font-size: 3.5rem; font-weight: 800; line-height: 1; color: white; }
+.period-container { display: flex; flex-direction: column; justify-content: center; margin-top: 5px; }
+.period { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+
+.maintenance-fee {
+    font-size: 0.9rem; color: #25d366; font-weight: 600;
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 5px;
+}
+.maintenance-fee::before { content: "+"; }
+
+/* Etiquetas y Lista */
+.promo-badge {
+    position: absolute; top: 15px; right: 15px;
+    background: #ff4d4d; color: white; font-weight: 700; font-size: 0.75rem;
+    padding: 4px 10px; border-radius: 20px; text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.3);
+}
 .features { list-style: none; margin-bottom: 2.5rem; flex-grow: 1; text-align: left; }
 .features li { margin-bottom: 0.8rem; color: #d1d5db; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
 .features li::before { content: "✓"; color: var(--secondary); font-weight: bold; font-size: 1.1rem; }
 .card.popular { border:1px solid var(--primary); background:linear-gradient(180deg,rgba(139,92,246,.1),transparent); }
-.badge { position:absolute; top:20px; right:20px; background:var(--primary); padding:6px 14px; border-radius:20px; font-size:.75rem; font-weight: 700; letter-spacing: 1px; }
 
 /* ---------------- TESTIMONIOS ---------------- */
 .testimonials { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; }
@@ -199,7 +281,17 @@ footer {
 @media (max-width: 768px) {
     .contact-box { padding: 1.5rem; }
     .hero-content h1 { font-size: 3rem; }
-    .price { font-size: 2.5rem; }
+    .big-number { font-size: 3rem; }
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .hero-buttons .btn {
+        width: 100%;
+    }
 }
 </style>
 </head>
@@ -215,7 +307,7 @@ footer {
         <h1>Webs que <span>Venden</span></h1>
         <p>Transformo ideas en sitios web profesionales diseñados para convertir visitantes en clientes. No solo diseño: construyo activos digitales que generan ingresos.</p>
 
-        <div>
+        <div class="hero-buttons">
             <button class="btn btn-primary" onclick="consultarPlan('Asesoría General')">Quiero mi Sitio</button>
             <a href="#precios" class="btn">Ver Precios</a>
         </div>
@@ -273,51 +365,85 @@ footer {
 
 <section id="precios">
     <div class="container">
-        <h2 class="section-title reveal">Planes Claros</h2>
-        <p class="section-subtitle reveal">Sin costos ocultos. Inversión única.</p>
+        <h2 class="section-title reveal">Planes Flexibles</h2>
+        <p class="section-subtitle reveal">Financiación en 6 pagos fijos + Mantenimiento accesible.</p>
 
         <div class="grid">
             <div class="card reveal">
                 <h3>Landing Page</h3>
-                <p>Perfecta para vender un servicio o captar leads.</p>
-                <div class="price">$150.000 <span>ARS</span></div>
+                <p>Ideal para validar ideas o captar leads rápido.</p>
+                
+                <span class="old-price">AR$ 180.000 total</span>
+                <div class="price-container">
+                    <span class="currency">AR$</span>
+                    <span class="big-number">25.000</span>
+                    <div class="period-container">
+                        <span class="period">x 6 meses</span>
+                    </div>
+                </div>
+                
+                <div class="maintenance-fee">AR$ 5.000 /mes mantenimiento</div>
+
                 <ul class="features">
                     <li>Diseño One-Page</li>
-                    <li>Responsive Mobile/PC</li>
-                    <li>Botón flotante WhatsApp</li>
-                    <li>Formulario de Contacto</li>
-                    <li>Entrega Express (72hs)</li>
+                    <li>Responsive (Celular/PC)</li>
+                    <li>Botón de WhatsApp</li>
+                    <li>Hosting incluido en mantenimiento</li>
+                    <li>Actualizaciones técnicas</li>
                 </ul>
-                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Landing Page')">Contratar Plan</button>
+                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Landing Page (6 cuotas)')">Contratar Plan</button>
             </div>
 
             <div class="card popular reveal">
-                <div class="badge">MÁS VENDIDO</div>
+                <div class="promo-badge">MÁS VENDIDO</div>
+                
                 <h3>Sitio Corporativo</h3>
-                <p>Ideal para negocios que buscan posicionarse.</p>
-                <div class="price">$350.000 <span>ARS</span></div>
+                <p>Para negocios que necesitan presencia sólida.</p>
+                
+                <span class="old-price">AR$ 420.000 total</span>
+                <div class="price-container">
+                    <span class="currency">AR$</span>
+                    <span class="big-number">58.300</span>
+                    <div class="period-container">
+                        <span class="period">x 6 meses</span>
+                    </div>
+                </div>
+
+                <div class="maintenance-fee">AR$ 8.500 /mes mantenimiento</div>
+
                 <ul class="features">
                     <li>Hasta 5 secciones internas</li>
                     <li>Optimización SEO Inicial</li>
                     <li>Animaciones Premium</li>
                     <li>Integración Google Maps</li>
-                    <li>1 mes de Soporte Gratis</li>
+                    <li>Hosting + Dominio (.com.ar) incluido</li>
                 </ul>
-                <button class="btn btn-primary" style="text-align: center; width:100%" onclick="consultarPlan('Sitio Corporativo')">Contratar Plan</button>
+                <button class="btn btn-primary" style="text-align: center; width:100%" onclick="consultarPlan('Sitio Corporativo (6 cuotas)')">Contratar Plan</button>
             </div>
 
             <div class="card reveal">
-                <h3>A Medida</h3>
-                <p>Sistemas complejos y tiendas online.</p>
-                <div class="price">Cotizar <span>USD</span></div>
+                <h3>E-commerce</h3>
+                <p>Tienda online completa con pasarela de pagos.</p>
+                
+                <span class="old-price">Consultar precio de lista</span>
+                <div class="price-container">
+                    <span class="currency">AR$</span>
+                    <span class="big-number">Cotizar</span>
+                    <div class="period-container">
+                        <span class="period">a medida</span>
+                    </div>
+                </div>
+
+                <div class="maintenance-fee">Mantenimiento a medida</div>
+
                 <ul class="features">
-                    <li>E-commerce / Tienda</li>
-                    <li>Panel de Administración</li>
-                    <li>Base de Datos</li>
-                    <li>Login de Usuarios</li>
-                    <li>Integración de Pagos</li>
+                    <li>Carga de productos</li>
+                    <li>Panel autoadministrable</li>
+                    <li>Cobros con MercadoPago</li>
+                    <li>Gestión de envíos</li>
+                    <li>Capacitación de uso</li>
                 </ul>
-                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Proyecto a Medida')">Consultar</button>
+                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Tienda E-commerce')">Consultar</button>
             </div>
         </div>
     </div>
@@ -330,15 +456,15 @@ footer {
 
         <div class="testimonials">
             <div class="testimonial reveal">
-                “Antes mi negocio no aparecía en Google. Hoy recibo consultas todos los días gracias a la web nueva. La inversión se pagó sola en dos semanas.”
+                "Antes mi negocio no aparecía en Google. Hoy recibo consultas todos los días gracias a la web nueva. La inversión se pagó sola en dos semanas."
                 <strong>— Leandro Paredes, Arquitecto</strong>
             </div>
             <div class="testimonial reveal">
-                “Necesitaba algo rápido para una campaña de publicidad y la landing page quedó increíble. Convierte visitas en ventas mucho mejor que la anterior.”
-                <strong>— Lautaro Blanco, Agencia de pintureria</strong>
+                "Necesitaba algo rápido para una campaña de publicidad y la landing page quedó increíble. Convierte visitas en ventas mucho mejor que la anterior."
+                <strong>— Lautaro Blanco, Agencia de Pintureria</strong>
             </div>
             <div class="testimonial reveal">
-                “El diseño es super moderno y carga volando en el celular. Mis clientes siempre me dicen que la web se ve muy profesional.”
+                "El diseño es super moderno y carga volando en el celular. Mis clientes siempre me dicen que la web se ve muy profesional."
                 <strong>— Ander Herrera, Soldador</strong>
             </div>
         </div>
@@ -399,7 +525,6 @@ footer {
 
 <script>
 // --- CONFIGURACIÓN GOOGLE SHEETS ---
-// Pega aquí la URL de tu Web App de Google Apps Script cuando la tengas:
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTeMcEtJU71eclWWOk3HBhnwiihtdfPIVbgXu_pFxnnTqGBYN7MSJngBSL2iXKl8ZK/exec"; 
 
 // 1. Animación Reveal
