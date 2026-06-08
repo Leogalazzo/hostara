@@ -12,16 +12,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-/* ---------------- VARIABLES ---------------- */
+
 :root {
-    --bg: #050505;
+    --bg: #020612; 
     --text: #ffffff;
-    --text-muted: #9ca3af;
-    --primary: #8b5cf6;
-    --primary-glow: rgba(139, 92, 246, 0.5);
-    --secondary: #06b6d4;
-    --glass: rgba(255, 255, 255, 0.03);
+    --text-muted: #94a3b8;
+    --primary: #0045cb; 
+    --primary-light: #2962ff;
+    --primary-glow: rgba(0, 69, 203, 0.6);
+    --secondary: #fcb000; 
+    --secondary-glow: rgba(252, 176, 0, 0.4);
+    --glass: rgba(10, 25, 60, 0.4);
     --glass-border: rgba(255, 255, 255, 0.08);
+    --danger: #ef4444; 
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -30,38 +33,38 @@ body {
     color: white;
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
-/* ---------------- SCROLLBAR PERSONALIZADO ---------------- */
+/* ---------------- SCROLLBAR ---------------- */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--primary);
     border-radius: 5px;
     border: 2px solid var(--bg);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
 html { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
 
 /* ---------------- BACKGROUND ---------------- */
 .ambient-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.blob { position: absolute; filter: blur(90px); opacity: .5; border-radius: 50%; animation: float 10s infinite ease-in-out alternate; }
+.blob { position: absolute; filter: blur(90px); opacity: .4; border-radius: 50%; animation: float 10s infinite ease-in-out alternate; }
 .blob-1 { top:-10%; left:-10%; width:50vw; height:50vw; background:var(--primary); }
-.blob-2 { bottom:-10%; right:-10%; width:50vw; height:50vw; background:var(--secondary); animation-delay: -5s; }
+.blob-2 { bottom:-10%; right:-10%; width:50vw; height:50vw; background:var(--secondary); animation-delay: -5s; opacity: 0.25; }
 @keyframes float { 0%{ transform:translate(0,0) scale(1);} 100%{ transform:translate(40px,60px) scale(1.1);} }
 
 /* ---------------- UTILIDADES ---------------- */
 .container { max-width:1200px; margin:auto; padding:0 2rem; }
 .section-title { text-align:center; font-size:clamp(2rem,5vw,3rem); font-weight:800; margin-bottom:1rem; line-height: 1.2; }
-.section-subtitle { text-align:center; color:var(--text-muted); margin-bottom:4rem; font-size: 1.1rem; }
+.section-subtitle { text-align:center; color:var(--text-muted); margin-bottom:3rem; font-size: 1.1rem; }
 
-/* --- BOTONES PREMIUM --- */
+/* --- BOTONES --- */
 .btn {
-    padding: 1rem 2.5rem;
+    padding: 0.8rem 2rem; 
     border-radius: 50px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-decoration: none;
     color: white;
     display: inline-flex;
@@ -74,9 +77,8 @@ html { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
     position: relative;
     overflow: hidden;
     vertical-align: middle;
-    height: 52px;
+    height: 48px;
     line-height: 1;
-    /* Estilo por defecto (Secundario/Glass) */
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -84,59 +86,74 @@ html { scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg); }
 
 .btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--secondary);
+    color: var(--secondary);
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-/* Botón Principal (Neón) */
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, #002875 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 20px var(--primary-glow);
+    color: white;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #9f7aea 0%, #6d28d9 100%);
-    box-shadow: 0 0 40px var(--primary-glow), 0 0 10px #fff;
+    background: linear-gradient(135deg, var(--secondary) 0%, #d49500 100%);
+    color: #000;
+    box-shadow: 0 0 30px var(--secondary-glow);
     transform: translateY(-3px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: transparent;
 }
 
-/* Contenedor de botones arreglado */
 .hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 2rem;
+    display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 2rem;
 }
 
-/* Botón flotante WhatsApp */
+/* --- BOTONES FLOTANTES --- */
+.whatsapp-btn, .scroll-top-btn {
+    position:fixed; bottom:25px; z-index: 100;
+    width: 50px; height: 50px; border-radius:50%; color:white;
+    display:flex; justify-content:center; align-items:center;
+    text-decoration: none; transition: 0.3s; cursor: pointer; border: none;
+}
+
 .whatsapp-btn {
-    position:fixed; bottom:25px; right:25px; background:#25d366; z-index: 100;
-    width: 60px; height: 60px; border-radius:50%; color:white;
-    display:flex; justify-content:center; align-items:center; box-shadow:0 0 20px #25d36660;
-    text-decoration: none; transition: 0.3s;
+    right: 25px;
+    background: #25d366;
+    box-shadow: 0 0 20px #25d36660;
 }
 .whatsapp-btn:hover { transform: scale(1.1); }
-.whatsapp-icon { width: 35px; height: 35px; fill: white; }
+.whatsapp-icon { width: 30px; height: 30px; fill: white; }
 
-/* ---------------- HERO (Modificado para que se vea lo de abajo) ---------------- */
+.scroll-top-btn {
+    left: 25px;
+    background: var(--primary); 
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
+    opacity: 0; 
+    pointer-events: none;
+    transform: translateY(20px);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+.scroll-top-btn.visible {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+.scroll-top-btn:hover { background: var(--secondary); color: black; transform: translateY(-5px); }
+
+/* ---------------- HERO ---------------- */
 header { 
-    /* 75vh asegura que sobre espacio abajo para ver la siguiente sección */
-    min-height: 75vh; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    text-align: center; 
-    padding: 4rem 0; 
+    min-height: 75vh; display: flex; justify-content: center; align-items: center; text-align: center; padding: 4rem 0; 
 }
 .hero-content h1 { font-size:clamp(3.5rem,8vw,6rem); font-weight:800; margin-bottom:1.5rem; line-height: 1.1; letter-spacing: -2px; }
 .hero-content h1 span {
-    background:linear-gradient(to right,var(--primary),var(--secondary));
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    color: var(--secondary);
+    background: none;
+    -webkit-text-fill-color: initial;
+    text-shadow: 0 0 30px var(--secondary-glow);
 }
 .hero-content p { max-width:620px; margin:0 auto 2.5rem; color:var(--text-muted); font-size: 1.2rem; }
 
@@ -152,23 +169,34 @@ header {
 .project-image img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s ease; }
 .project-image::after {
     content: "VER DEMO"; position: absolute; inset: 0;
-    background: rgba(139, 92, 246, 0.8); color: white; font-weight: 800; letter-spacing: 1px;
+    background: rgba(0, 69, 203, 0.85);
+    color: var(--secondary);
+    font-weight: 800; letter-spacing: 1px;
     display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;
     font-size: 1.1rem; pointer-events: none;
 }
-.project-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.project-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
 .project-card:hover .project-image::after { opacity: 1; }
 .project-card:hover .project-image img { transform: scale(1.05); }
-.project-info { padding: 1.2rem; background: rgba(0, 0, 0, 0.2); text-align: left; }
+.project-info { padding: 1.2rem; background: rgba(0, 5, 20, 0.4); text-align: left; }
 .project-info h3 { font-size: 1.2rem; margin-bottom: 0.2rem; color: white; line-height: 1.2; }
-.project-info span { color: var(--secondary); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 5px; }
-.project-info span::before { content: "🔗"; font-size: 0.8rem; }
+.project-info span { color: var(--secondary); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.project-info span::before {
+    content: "";
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fcb000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/%3E%3Cpath d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
 .alert-note {
-    background: var(--glass); padding: 1rem; border-radius: 12px; border: 1px solid var(--glass-border);
+    background: rgba(0, 69, 203, 0.1); padding: 1rem; border-radius: 12px; border: 1px solid var(--primary);
     margin-bottom: 3rem; text-align: center; color: var(--secondary); font-weight: 600;
 }
 
-/* ---------------- MODAL / POPUP ---------------- */
+/* ---------------- MODAL ---------------- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center;
@@ -181,62 +209,230 @@ header {
 }
 .modal-header {
     padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;
-    background: rgba(26, 26, 26, 0.8); border-bottom: 1px solid var(--glass-border);
+    background: var(--primary);
+    border-bottom: 1px solid var(--glass-border);
 }
 .close-btn {
-    background: var(--primary); color: white; border: none; padding: 8px 15px;
+    background: black; color: white; border: none; padding: 8px 15px;
     border-radius: 8px; cursor: pointer; font-size: 1rem; transition: 0.3s;
 }
-.close-btn:hover { background: #7c3aed; }
+.close-btn:hover { background: var(--secondary); color: black; }
 .modal-iframe { flex-grow: 1; width: 100%; border: none; }
 
-/* ---------------- CARDS PRECIOS (ESTILO HOSTINGER) ---------------- */
-section { padding:6rem 0; }
-.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; }
+/* --- LOADER DEL MODAL --- */
+.modal-loader {
+    position: absolute; inset: 0;
+    background: var(--bg);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem; z-index: 10;
+    transition: opacity 0.3s;
+    margin-top: 45px; /* altura del header */
+}
+.modal-loader.hidden { opacity: 0; pointer-events: none; }
+.loader-spinner {
+    width: 48px; height: 48px; border-radius: 50%;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top-color: var(--secondary);
+    animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loader-text { color: var(--text-muted); font-size: 0.95rem; }
+
+/* ---------------- FEATURES INCLUIDAS ---------------- */
+.features-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 2.5rem 0 3rem;
+}
+.feature-item {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    transition: 0.3s;
+}
+.feature-item:hover {
+    border-color: var(--secondary);
+    background: rgba(252, 176, 0, 0.05);
+}
+.feature-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: rgba(252, 176, 0, 0.1);
+    border: 1px solid rgba(252, 176, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.feature-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--secondary);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.feature-item h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.2rem;
+}
+.feature-item p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* ---------------- PROYECTOS PRIVADOS ---------------- */
+.private-projects-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+}
+.private-projects-title::before,
+.private-projects-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--glass-border);
+    max-width: 120px;
+}
+.private-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.private-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+    opacity: 0.65;
+    filter: grayscale(0.3);
+    position: relative;
+    overflow: hidden;
+}
+.private-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.015) 10px,
+        rgba(255,255,255,0.015) 20px
+    );
+}
+.private-lock {
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+.private-lock svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.private-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin: 0;
+}
+.private-card span {
+    font-size: 0.75rem;
+    color: rgba(148,163,184,0.6);
+}
+.private-note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.03);
+    border: 1px dashed rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 0.8rem 1.2rem;
+}
+
+/* ---------------- CARDS PRECIOS ---------------- */
+section { padding: 4rem 0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
 
 .card {
     background:var(--glass); border:1px solid var(--glass-border);
-    border-radius:24px; padding:2.5rem; backdrop-filter:blur(10px);
+    border-radius:20px; padding: 1.8rem;
+    backdrop-filter:blur(10px);
     transition:.4s; position:relative; display: flex; flex-direction: column;
     justify-content: space-between;
 }
 .card:hover {
-    transform:translateY(-10px); border-color:rgba(139,92,246,.4);
-    box-shadow:0 20px 40px -20px rgba(0,0,0,.5);
+    transform:translateY(-8px); border-color: var(--secondary);
+    box-shadow:0 10px 30px rgba(252, 176, 0, 0.15);
 }
-.card h3 { font-size: 1.5rem; color: white; margin-bottom: 0.5rem; }
-.card > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; height: 40px; }
+.card h3 { font-size: 1.3rem; color: white; margin-bottom: 0.3rem; }
+.card > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; height: 35px; line-height: 1.3; }
 
-/* Nuevos Estilos de Precio */
-.old-price {
-    text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem;
-    margin-bottom: -10px; display: block;
-}
-.price-container {
-    display: flex; align-items: flex-start; gap: 5px; margin: 1rem 0 0.5rem 0;
-}
-.currency { font-size: 1.2rem; font-weight: 600; margin-top: 8px; }
-.big-number { font-size: 3.5rem; font-weight: 800; line-height: 1; color: white; }
-.period-container { display: flex; flex-direction: column; justify-content: center; margin-top: 5px; }
-.period { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
 
-.maintenance-fee {
-    font-size: 0.9rem; color: #25d366; font-weight: 600;
-    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 5px;
-}
-.maintenance-fee::before { content: "+"; }
 
-/* Etiquetas y Lista */
 .promo-badge {
     position: absolute; top: 15px; right: 15px;
-    background: #ff4d4d; color: white; font-weight: 700; font-size: 0.75rem;
-    padding: 4px 10px; border-radius: 20px; text-transform: uppercase;
-    box-shadow: 0 4px 10px rgba(255, 77, 77, 0.3);
+    background: var(--secondary); color: #000; font-weight: 800; font-size: 0.7rem;
+    padding: 3px 10px; border-radius: 20px; text-transform: uppercase;
+    box-shadow: 0 4px 10px var(--secondary-glow);
 }
-.features { list-style: none; margin-bottom: 2.5rem; flex-grow: 1; text-align: left; }
-.features li { margin-bottom: 0.8rem; color: #d1d5db; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
-.features li::before { content: "✓"; color: var(--secondary); font-weight: bold; font-size: 1.1rem; }
-.card.popular { border:1px solid var(--primary); background:linear-gradient(180deg,rgba(139,92,246,.1),transparent); }
+
+.features { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; text-align: left; }
+.features li { 
+    margin-bottom: 0.5rem; color: #e2e8f0; display: flex; align-items: flex-start; gap: 8px; 
+    font-size: 0.9rem; line-height: 1.3;
+}
+.features li::before { 
+    content: "✓"; color: var(--secondary); font-weight: bold; font-size: 1rem; min-width: 15px;
+}
+
+.features li.excluded { color: var(--text-muted); opacity: 0.8; }
+.features li.excluded::before { content: "✕"; color: var(--danger); }
+
+.info-precio {
+    display: block; width: 100%; font-size: 0.85em;
+    color: var(--text-muted); font-style: italic; margin-top: 0px;
+}
+
+.card.popular { 
+    border: 1px solid var(--secondary);
+    background: linear-gradient(180deg, rgba(0, 69, 203, 0.15), transparent); 
+}
 
 /* ---------------- TESTIMONIOS ---------------- */
 .testimonials { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; }
@@ -244,55 +440,267 @@ section { padding:6rem 0; }
     background:var(--glass); border-radius:20px; border:1px solid var(--glass-border);
     padding:2rem; line-height:1.6; font-style: italic; color: #e5e7eb;
 }
-.testimonial strong { display: block; margin-top: 1rem; color: var(--primary); font-style: normal; font-size: 0.9rem; }
-
-/* ---------------- CONTACTO ---------------- */
-.contact-box {
-    background:var(--glass); border:1px solid var(--glass-border);
-    padding:3rem; border-radius:24px; max-width:700px; margin:auto;
-}
-.form-group { margin-bottom: 1rem; }
-input, textarea, select {
-    width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;
-    color: white; font-family: inherit; font-size: 1rem; transition: 0.3s; outline: none;
-}
-input:focus, textarea:focus, select:focus {
-    border-color: var(--primary); background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
-}
-select option { background: #1a1a1a; color: white; }
+.testimonial strong { display: block; margin-top: 1rem; color: var(--secondary); font-style: normal; font-size: 0.9rem; }
 
 /* ---------------- FOOTER ---------------- */
+/* ---------------- FOOTER ---------------- */
 footer {
-    padding:3rem 0; text-align:center; border-top:1px solid var(--glass-border);
-    color:var(--text-muted); font-size:.9rem; margin-top: 4rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), var(--primary), transparent);
+}
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 3rem;
+    padding: 3.5rem 0 2.5rem;
+}
+.footer-brand p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin: 0.8rem 0 1.5rem;
+    max-width: 260px;
+}
+.footer-logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
+}
+.footer-logo span { color: var(--secondary); }
+.footer-social {
+    display: flex;
+    gap: 0.6rem;
+}
+.footer-social a {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass);
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.footer-social a:hover {
+    border-color: var(--secondary);
+    background: rgba(252,176,0,0.1);
+}
+.footer-social a svg {
+    width: 16px; height: 16px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: 0.3s;
+}
+.footer-social a:hover svg { stroke: var(--secondary); }
+.footer-col h5 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+}
+.footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+.footer-col ul li a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.footer-col ul li a::before {
+    content: '';
+    width: 0;
+    height: 1px;
+    background: var(--secondary);
+    transition: width 0.2s;
+    display: inline-block;
+}
+.footer-col ul li a:hover { color: white; }
+.footer-col ul li a:hover::before { width: 12px; }
+.footer-bottom {
+    border-top: 1px solid var(--glass-border);
+    padding: 1.4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.footer-bottom p {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+.footer-bottom p strong { color: white; }
+.footer-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+.footer-badge span {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 6px #22c55e;
+    animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+@media (max-width: 768px) {
+    .footer-main { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 0 2rem; }
+    .footer-brand p { max-width: 100%; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* ---------------- SELECTOR CONTACTO ---------------- */
+.selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+}
+
+.selector-card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.8rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: 'Outfit', sans-serif;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.selector-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(252,176,0,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.selector-card:hover {
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(252, 176, 0, 0.12);
+}
+
+.selector-card:hover::before { opacity: 1; }
+
+.selector-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(252, 176, 0, 0.1);
+    border: 1px solid rgba(252, 176, 0, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.4rem;
+    transition: 0.3s;
+}
+
+.selector-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--secondary);
+    transition: 0.3s;
+}
+
+.selector-card:hover .selector-icon {
+    background: rgba(252, 176, 0, 0.18);
+}
+
+.selector-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.selector-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+.selector-cta {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 0.4rem;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: all 0.3s;
+}
+
+.selector-cta::after {
+    content: '→';
+    font-size: 1rem;
+}
+
+.selector-card:hover .selector-cta {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* ---------------- ANIMACIONES ---------------- */
 .reveal { opacity:0; transform:translateY(60px); transition:all .8s ease-out; }
 .reveal.active { opacity:1; transform:translateY(0); }
 
-/* ESTILOS ALERTAS FORMULARIO */
 .status-msg { margin-top: 1rem; font-weight: bold; display: none; }
-.success { color: #25d366; }
-.error { color: #ef4444; }
+.success { color: var(--secondary); }
+.error { color: var(--danger); }
 
 @media (max-width: 768px) {
     .contact-box { padding: 1.5rem; }
     .hero-content h1 { font-size: 3rem; }
-    .big-number { font-size: 3rem; }
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .hero-buttons .btn {
-        width: 100%;
-    }
+    .big-number { font-size: 2.5rem; }
+    .hero-buttons { flex-direction: column; width: 100%; max-width: 300px; margin: 2rem auto 0; }
+    .hero-buttons .btn { width: 100%; }
 }
+
 </style>
 </head>
 <body>
@@ -301,6 +709,10 @@ footer {
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 </div>
+
+<button onclick="scrollToTop()" id="scrollTopBtn" class="scroll-top-btn" title="Volver arriba">
+    ↑
+</button>
 
 <header>
     <div class="container hero-content reveal">
@@ -320,13 +732,13 @@ footer {
         <p class="section-subtitle reveal">Resultados reales para clientes reales.</p>
         
         <p class="alert-note reveal">
-            ¡Haz clic en cualquier proyecto para ver la DEMO interactiva en pantalla completa!
+            ¡Presiona en cualquier proyecto para ver la DEMO interactiva en pantalla completa!
         </p>
 
         <div class="project-grid">
             <div class="project-card reveal" onclick="openModal('https://tabymakeup.com.ar/', 'Taby Makeup')">
                 <div class="project-image">
-                    <img src="tabymakeup.png" alt="Taby Makeup">
+                    <img src="tabymakeup-rebranding.png" alt="Taby Makeup">
                 </div>
                 <div class="project-info">
                     <h3>Taby Makeup</h3>
@@ -344,15 +756,145 @@ footer {
                 </div>
             </div>
 
-            <div class="project-card reveal" onclick="openModal('https://leogalazzo.github.io/pandashop-bd/', 'Panda Shop')">
+            <div class="project-card reveal" onclick="openModal('https://carloessential.com.ar/', 'Carlo Essential')">
                 <div class="project-image">
-                    <img src="Panda.png" alt="Panda Shop">
+                    <img src="carlo.png" alt="Carlo Essential">
                 </div>
                 <div class="project-info">
-                    <h3>Panda Shop</h3>
-                    <span>pandashop-bd.github.io</span>
+                    <h3>Carlo Essential</h3>
+                    <span>carloessential.com.ar</span>
                 </div>
             </div>
+
+            <div class="project-card reveal" onclick="openModal('https://mqbmenu.vercel.app/', 'Mas que Burgers Menú')">
+                <div class="project-image">
+                    <img src="mqbmenu.png" alt="Mas que Burgers Menú">
+                </div>
+                <div class="project-info">
+                    <h3>Mas que Burgers Menú</h3>
+                    <span>mqbmenu.vercel.app</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" onclick="openModal('https://subitufoto.vercel.app/', 'Subí tu foto')">
+                <div class="project-image">
+                    <img src="subitufoto.png" alt="Mas que Burgers Menú">
+                </div>
+                <div class="project-info">
+                    <h3>Subí tu foto - Mas que Burgers</h3>
+                    <span>subitufoto.vercel.app</span>
+                </div>
+            </div>
+
+              <div class="project-card reveal" onclick="openModal('https://www.masqueburgers.com.ar/', 'Puntos Mqb')">
+                <div class="project-image">
+                    <img src="puntos.png" alt="Mas que Burgers Puntos">
+                </div>
+                <div class="project-info">
+                    <h3>Puntos - Mas que Burgers</h3>
+                    <span>masqueburgers.com.ar</span>
+                </div>
+            </div>
+
+              <div class="project-card reveal" onclick="openModal('https://polifonia.vercel.app/', 'polifonia.')">
+                <div class="project-image">
+                    <img src="polifonia.png" alt="Mas que Burgers Menú">
+                </div>
+                <div class="project-info">
+                    <h3>polifonia.</h3>
+                    <span>polifonia.vercel.app</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" onclick="openModal('https://ramiroventas.com.ar/', 'Ramiro Ventas')">
+                <div class="project-image">
+                    <img src="ramiroventas.png" alt="Ramiro Ventas">
+                </div>
+                <div class="project-info">
+                    <h3>Ramiro Ventas</h3>
+                    <span>ramiroventas.com.ar</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- FEATURES INCLUIDAS -->
+        <div class="features-strip reveal">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <!-- database -->
+                    <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+                </div>
+                <div>
+                    <h4>Base de datos en tiempo real</h4>
+                    <p>Todos los sitios están conectados a una Base de Datos. La información se actualizan al instante.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <!-- settings/sliders -->
+                    <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="8" cy="6" r="2" fill="var(--secondary)" stroke="none"/><circle cx="16" cy="12" r="2" fill="var(--secondary)" stroke="none"/><circle cx="10" cy="18" r="2" fill="var(--secondary)" stroke="none"/></svg>
+                </div>
+                <div>
+                    <h4>Panel de administración</h4>
+                    <p>Cada cliente puede subir productos, cambiar fotos, precios y stock sin saber programar.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <!-- package/box -->
+                    <svg viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+                </div>
+                <div>
+                    <h4>Gestión de pedidos</h4>
+                    <p>Sistema de órdenes con estados, notificaciones y panel de control incluido.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <!-- smartphone -->
+                    <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18" stroke-width="3"/></svg>
+                </div>
+                <div>
+                    <h4>100% mobile-first</h4>
+                    <p>Diseñados primero para celular. Funcionan perfecto en cualquier pantalla.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROYECTOS PRIVADOS -->
+        <div class="reveal">
+            <p class="private-projects-title">Más proyectos desarrollados</p>
+            <div class="private-grid">
+                <div class="private-card">
+                    <div class="private-lock">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h4>Sistema Administrativo</h4>
+                    <span>Acceso privado</span>
+                </div>
+                <div class="private-card">
+                    <div class="private-lock">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h4>Panel de Gestión</h4>
+                    <span>Acceso privado</span>
+                </div>
+                <div class="private-card">
+                    <div class="private-lock">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h4>Sistema de Turnos</h4>
+                    <span>Acceso privado</span>
+                </div>
+                <div class="private-card">
+                    <div class="private-lock">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <h4>Dashboard Interno</h4>
+                    <span>Acceso privado</span>
+                </div>
+            </div>
+            <p class="private-note">Tenemos proyectos adicionales que por acuerdo de confidencialidad con los clientes no podemos mostrar públicamente. <strong>Consultanos</strong> para más referencias.</p>
         </div>
 
         <div class="reveal" style="text-align: center; margin-top: 3rem;">
@@ -366,30 +908,29 @@ footer {
 <section id="precios">
     <div class="container">
         <h2 class="section-title reveal">Planes Flexibles</h2>
-        <p class="section-subtitle reveal">Financiación en 6 pagos fijos + Mantenimiento accesible.</p>
+        <p class="section-subtitle reveal">Elegí el plan que mejor se adapte a tu negocio.</p>
 
         <div class="grid">
             <div class="card reveal">
                 <h3>Landing Page</h3>
                 <p>Ideal para validar ideas o captar leads rápido.</p>
                 
-                <span class="old-price">AR$ 180.000 total</span>
-                <div class="price-container">
-                    <span class="currency">AR$</span>
-                    <span class="big-number">25.000</span>
-                    <div class="period-container">
-                        <span class="period">x 6 meses</span>
-                    </div>
-                </div>
-                
-                <div class="maintenance-fee">AR$ 5.000 /mes mantenimiento</div>
+
 
                 <ul class="features">
-                    <li>Diseño One-Page</li>
-                    <li>Responsive (Celular/PC)</li>
-                    <li>Botón de WhatsApp</li>
+                    <li>Diseño One-Page Moderno</li>
+                    <li>100% Adaptable (Celular/PC)</li>
+                    <li>Botón de WhatsApp + Formulario</li>
+                    <li>Enlaces a Redes Sociales</li>
+                    <li>Certificado SSL (Sitio Seguro)</li>
                     <li>Hosting incluido en mantenimiento</li>
                     <li>Actualizaciones técnicas</li>
+                    <li class="excluded">
+                        <div style="display:flex; flex-direction:column;">
+                            <span>Dominio .com.ar (No incluido)</span>
+                            <span class="info-precio">*Aprox. AR$ 8.500 en nic.ar</span>
+                        </div>
+                    </li>
                 </ul>
                 <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Landing Page (6 cuotas)')">Contratar Plan</button>
             </div>
@@ -397,75 +938,44 @@ footer {
             <div class="card popular reveal">
                 <div class="promo-badge">MÁS VENDIDO</div>
                 
-                <h3>Sitio Corporativo</h3>
-                <p>Para negocios que necesitan presencia sólida.</p>
+                <h3>Ideal para Emprendedores</h3>
+                <p>Para negocios que necesitan nuevas teconologías.</p>
                 
-                <span class="old-price">AR$ 420.000 total</span>
-                <div class="price-container">
-                    <span class="currency">AR$</span>
-                    <span class="big-number">58.300</span>
-                    <div class="period-container">
-                        <span class="period">x 6 meses</span>
-                    </div>
-                </div>
 
-                <div class="maintenance-fee">AR$ 8.500 /mes mantenimiento</div>
 
                 <ul class="features">
-                    <li>Hasta 5 secciones internas</li>
-                    <li>Optimización SEO Inicial</li>
-                    <li>Animaciones Premium</li>
-                    <li>Integración Google Maps</li>
-                    <li>Hosting + Dominio (.com.ar) incluido</li>
+                    <li>Carga de productos</li>
+                    <li>Panel autoadministrable (Fácil uso)</li>
+                    <li>Pagos online o Integración con WhatsApp</li>
+                    <li>Carrito de compras</li>
+                    <li>Hosting incluido</li>
+                    <li>Certificado SSL (Sitio Seguro)</li>
+                    <li>Posicionamiento en Google (SEO)</li>
+                    <li>Actualizaciones técnicas</li>
+                    <li>Soporte Prioritario por WhatsApp</li>
+                    <li class="excluded">
+                        <div style="display:flex; flex-direction:column;">
+                            <span>Dominio .com.ar (No incluido)</span>
+                            <span class="info-precio">*Aprox. AR$ 8.500 en nic.ar</span>
+                        </div>
+                    </li>
                 </ul>
                 <button class="btn btn-primary" style="text-align: center; width:100%" onclick="consultarPlan('Sitio Corporativo (6 cuotas)')">Contratar Plan</button>
             </div>
 
             <div class="card reveal">
-                <h3>E-commerce</h3>
-                <p>Tienda online completa con pasarela de pagos.</p>
+                <h3>Sistemas a Medida</h3> 
+                <p>Soluciones complejas para necesidades específicas.</p>
                 
-                <span class="old-price">Consultar precio de lista</span>
-                <div class="price-container">
-                    <span class="currency">AR$</span>
-                    <span class="big-number">Cotizar</span>
-                    <div class="period-container">
-                        <span class="period">a medida</span>
-                    </div>
-                </div>
 
-                <div class="maintenance-fee">Mantenimiento a medida</div>
 
                 <ul class="features">
-                    <li>Carga de productos</li>
-                    <li>Panel autoadministrable</li>
-                    <li>Cobros con MercadoPago</li>
-                    <li>Gestión de envíos</li>
-                    <li>Capacitación de uso</li>
+                    <li>Apps Web / Sistemas de Gestión</li>
+                    <li>Sistemas de Turnos y Reservas</li>
+                    <li>Paneles de Administración (Dashboards)</li>
                 </ul>
-                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Tienda E-commerce')">Consultar</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section>
-    <div class="container">
-        <h2 class="section-title reveal">Clientes Felices</h2>
-        <p class="section-subtitle reveal">Historias reales. Resultados reales.</p>
-
-        <div class="testimonials">
-            <div class="testimonial reveal">
-                "Antes mi negocio no aparecía en Google. Hoy recibo consultas todos los días gracias a la web nueva. La inversión se pagó sola en dos semanas."
-                <strong>— Leandro Paredes, Arquitecto</strong>
-            </div>
-            <div class="testimonial reveal">
-                "Necesitaba algo rápido para una campaña de publicidad y la landing page quedó increíble. Convierte visitas en ventas mucho mejor que la anterior."
-                <strong>— Lautaro Blanco, Agencia de Pintureria</strong>
-            </div>
-            <div class="testimonial reveal">
-                "El diseño es super moderno y carga volando en el celular. Mis clientes siempre me dicen que la web se ve muy profesional."
-                <strong>— Ander Herrera, Soldador</strong>
+                
+                <button class="btn" style="text-align: center; width:100%" onclick="consultarPlan('Proyecto a Medida')">Consultar</button>
             </div>
         </div>
     </div>
@@ -473,38 +983,145 @@ footer {
 
 <section id="contacto">
     <div class="container">
-        <h2 class="section-title reveal">¿Tenés una duda específica?</h2>
-        <p class="section-subtitle reveal">Si preferís escribirme por correo, usá este formulario.</p>
+        <h2 class="section-title reveal">¿En qué te puedo ayudar?</h2>
+        <p class="section-subtitle reveal">Elegí lo que mejor describe tu situación y serás dirigido a mi WhatsApp</p>
 
-        <div class="contact-box reveal">
-            <form id="contactForm">
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem; margin-bottom: 1rem;">
-                    <input type="text" name="nombre" placeholder="Tu Nombre" required>
-                    <input type="email" name="email" placeholder="Tu Email" required>
+        <div class="selector-grid reveal">
+
+            <button class="selector-card" onclick="contactarWhatsApp('landing')">
+                <div class="selector-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="3"/>
+                        <path d="M3 9h18"/>
+                        <path d="M9 21V9"/>
+                    </svg>
                 </div>
+                <h4>Quiero una Landing Page</h4>
+                <p>Página de presentación para mi negocio o emprendimiento.</p>
+                <span class="selector-cta">Consultar por WhatsApp</span>
+            </button>
 
-                <div class="form-group">
-                    <select name="interes">
-                        <option value="Consulta General">Tengo una consulta general</option>
-                        <option value="Empresa">Soy una empresa / agencia</option>
-                        <option value="Otro">Otro motivo</option>
-                    </select>
+            <button class="selector-card" onclick="contactarWhatsApp('tienda')">
+                <div class="selector-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
                 </div>
+                <h4>Necesito una Tienda Online</h4>
+                <p>Vender mis productos con carrito, pagos y panel de gestión.</p>
+                <span class="selector-cta">Consultar por WhatsApp</span>
+            </button>
 
-                <div class="form-group">
-                    <textarea name="mensaje" rows="4" placeholder="¿En qué te puedo ayudar?" required></textarea>
+            <button class="selector-card" onclick="contactarWhatsApp('sistema')">
+                <div class="selector-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/>
+                        <path d="M8 21h8M12 17v4"/>
+                        <path d="M7 8h2M11 8h6M7 11h4M15 11h2"/>
+                    </svg>
                 </div>
+                <h4>Quiero un Sistema a Medida</h4>
+                <p>App web, panel de administración o sistema de gestión propio.</p>
+                <span class="selector-cta">Consultar por WhatsApp</span>
+            </button>
 
-                <button type="submit" id="submitBtn" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">Enviar Mensaje 📩</button>
-                
-                <p id="formStatus" class="status-msg"></p>
-            </form>
+            <button class="selector-card" onclick="contactarWhatsApp('menu')">
+                <div class="selector-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 8C8 10 5.9 16.17 3.82 19.34"/>
+                        <path d="M12 5c0 0 0 9-8 11"/>
+                        <path d="M22 2c0 0-4 2-6 8-2-1-4-1-5 0 1-5 5-8 11-8z"/>
+                    </svg>
+                </div>
+                <h4>Menú Digital para Gastronomía</h4>
+                <p>Carta digital con QR para restaurantes, bares o cafeterías.</p>
+                <span class="selector-cta">Consultar por WhatsApp</span>
+            </button>
+
+            <button class="selector-card" onclick="contactarWhatsApp('mantenimiento')">
+                <div class="selector-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h4>Tengo un sitio y necesito ayuda</h4>
+                <p>Mantenimiento, cambios o mejoras en un sitio ya existente.</p>
+                <span class="selector-cta">Consultar por WhatsApp</span>
+            </button>
+
+            <button class="selector-card" onclick="contactarWhatsApp('otro')">
+                <div class="selector-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17" stroke-width="3"/>
+                    </svg>
+                </div>
+                <h4>Tengo otra consulta</h4>
+                <p>No sé bien qué necesito, pero me gustaría hablar con alguien.</p>
+                <span class="selector-cta">Consultar por WhatsApp</span>
+            </button>
+
         </div>
     </div>
 </section>
 
 <footer>
-    © 2025 Hostara — Desarrollo Web Profesional.
+    <div class="container">
+        <div class="footer-main">
+
+            <!-- Marca -->
+            <div class="footer-brand footer-col">
+                <div class="footer-logo">Hos<span>tara</span></div>
+                <p>Desarrollo web profesional para negocios que quieren crecer. Sistemas reales, resultados reales.</p>
+                <div class="footer-social">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/hostara.dev/" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/5493644539325" target="_blank" aria-label="WhatsApp">
+                        <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    </a>
+               
+                    
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="footer-col">
+                <h5>Navegación</h5>
+                <ul>
+                    <li><a href="#trabajos">Proyectos</a></li>
+                    <li><a href="#precios">Precios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="https://wa.me/5493644539325" target="_blank">WhatsApp directo</a></li>
+                </ul>
+            </div>
+
+            <!-- Servicios -->
+            <div class="footer-col">
+                <h5>Servicios</h5>
+                <ul>
+                    <li><a href="#precios">Landing Page</a></li>
+                    <li><a href="#precios">Tienda Online</a></li>
+                    <li><a href="#precios">Sitio Corporativo</a></li>
+                    <li><a href="#precios">Sistemas a Medida</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 <strong>Hostara</strong> — Todos los derechos reservados.</p>
+            <div class="footer-badge">
+                <span></span>
+                Disponible para nuevos proyectos
+            </div>
+        </div>
+    </div>
 </footer>
 
 <a href="https://wa.me/5493644539325" class="whatsapp-btn" target="_blank">
@@ -519,14 +1136,15 @@ footer {
             <span id="modal-title">Cargando Proyecto...</span>
             <button class="close-btn" onclick="closeModal()">Cerrar (ESC)</button>
         </div>
+        <div class="modal-loader" id="modal-loader">
+            <div class="loader-spinner"></div>
+            <span class="loader-text">Cargando sitio...</span>
+        </div>
         <iframe id="project-iframe" class="modal-iframe" src="" allowfullscreen></iframe>
     </div>
 </div>
 
 <script>
-// --- CONFIGURACIÓN GOOGLE SHEETS ---
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwTeMcEtJU71eclWWOk3HBhnwiihtdfPIVbgXu_pFxnnTqGBYN7MSJngBSL2iXKl8ZK/exec"; 
-
 // 1. Animación Reveal
 const observer = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('active'); observer.unobserve(e.target); } });
@@ -541,38 +1159,20 @@ function consultarPlan(plan) {
     window.open(url, '_blank');
 }
 
-// 3. Funcionalidad: Formulario -> Google Sheets
-const form = document.getElementById('contactForm');
-const statusMsg = document.getElementById('formStatus');
-const submitBtn = document.getElementById('submitBtn');
-
-form.addEventListener('submit', e => {
-    e.preventDefault();
-    if (SCRIPT_URL === "URL_DE_TU_GOOGLE_APPS_SCRIPT_AQUI") {
-        alert("¡Falta configurar la URL del Script de Google! Revisa el código.");
-        return;
-    }
-
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Enviando...";
-
-    fetch(SCRIPT_URL, { method: 'POST', body: new FormData(form) })
-    .then(response => {
-        statusMsg.innerText = "¡Mensaje enviado! Te responderé pronto.";
-        statusMsg.className = "status-msg success";
-        statusMsg.style.display = "block";
-        form.reset();
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Enviar Mensaje 📩";
-    })
-    .catch(error => {
-        statusMsg.innerText = "Hubo un error. Por favor intenta por WhatsApp.";
-        statusMsg.className = "status-msg error";
-        statusMsg.style.display = "block";
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Enviar Mensaje 📩";
-    });
-});
+// 3. Funcionalidad: Selector de interés → WhatsApp
+function contactarWhatsApp(tipo) {
+    const telefono = "5493644539325";
+    const mensajes = {
+        landing:        "Hola Hostara! Me interesa una *Landing Page* para mi negocio. ¿Me podés dar más información?",
+        tienda:         "Hola Hostara! Necesito una *Tienda Online* con carrito y panel de gestión. ¿Me podés contar más?",
+        sistema:        "Hola Hostara! Estoy buscando un *Sistema a Medida* (app web / panel de administración). ¿Podemos hablar?",
+        menu:           "Hola Hostara! Me interesa un *Menú Digital con QR* para mi local gastronómico. ¿Me mandás más info?",
+        mantenimiento:  "Hola Hostara! Tengo un sitio web existente y necesito *ayuda con mantenimiento o cambios*. ¿Podés ayudarme?",
+        otro:           "Hola Hostara! Quiero hacer una consulta sobre desarrollo web. ¿Tenés un momento para hablar?"
+    };
+    const mensaje = mensajes[tipo] || mensajes.otro;
+    window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+}
 
 // 4. Funcionalidad del Modal
 const modal = document.getElementById('project-modal');
@@ -580,8 +1180,14 @@ const iframe = document.getElementById('project-iframe');
 const modalTitle = document.getElementById('modal-title');
 
 function openModal(url, title = 'Demo de Proyecto') {
-    document.body.style.overflow = 'hidden'; 
+    document.body.style.overflow = 'hidden';
     modalTitle.textContent = title;
+
+    const loader = document.getElementById('modal-loader');
+    loader.classList.remove('hidden');
+
+    iframe.onload = () => loader.classList.add('hidden');
+
     iframe.src = url;
     modal.style.display = 'flex';
 }
@@ -589,7 +1195,8 @@ function openModal(url, title = 'Demo de Proyecto') {
 function closeModal() {
     document.body.style.overflow = '';
     modal.style.display = 'none';
-    iframe.src = ''; 
+    iframe.src = '';
+    document.getElementById('modal-loader').classList.remove('hidden');
 }
 
 document.addEventListener('keydown', (e) => {
@@ -599,7 +1206,23 @@ document.addEventListener('keydown', (e) => {
 modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
 });
+
+// 5. Funcionalidad Scroll Top
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        scrollTopBtn.classList.add("visible");
+    } else {
+        scrollTopBtn.classList.remove("visible");
+    }
+};
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 </script>
 
 </body>
+
 </html>
